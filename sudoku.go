@@ -1,4 +1,5 @@
 package main
+import "fmt"
 
 func SolveSudoku(board [][]int) [][]int {
 	// Make a quick lookup map for rows
@@ -98,4 +99,35 @@ func backtrack(board [][]int, rows, columns, cells []map[int]bool, r, c int) boo
 		board[r][c] = 0
 	}
 	return false
+}
+
+func printBoard(grid [][]int) {
+	for i, row := range grid {
+		if i%3 == 0 && i != 0 {
+			fmt.Println("------+-------+------")
+		}
+		for j, num := range row {
+			if j%3 == 0 && j != 0 {
+				fmt.Print("| ")
+			}
+			fmt.Printf("%d ", num)
+		}
+		fmt.Println()
+	}
+}
+
+func main() {
+	sudokuBoard := [][]int{
+		{5, 3, 0, 0, 7, 0, 0, 0, 0},
+		{6, 0, 0, 1, 9, 5, 0, 0, 0},
+		{0, 9, 8, 0, 0, 0, 0, 6, 0},
+		{8, 0, 0, 0, 6, 0, 0, 0, 3},
+		{4, 0, 0, 8, 0, 3, 0, 0, 1},
+		{7, 0, 0, 0, 2, 0, 0, 0, 6},
+		{0, 6, 0, 0, 0, 0, 2, 8, 0},
+		{0, 0, 0, 4, 1, 9, 0, 0, 5},
+		{0, 0, 0, 0, 8, 0, 0, 7, 9},
+	}
+	solved := SolveSudoku(sudokuBoard)
+	printBoard(solved)
 }
